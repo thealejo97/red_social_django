@@ -1,0 +1,19 @@
+{% extends 'social/layout.html' %}
+
+{% block content %}
+<div class="profile">
+<a href="{% url 'profile' user.username %}">
+    <img src="{{user.profile.image.url}}"  >
+</a>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="profile" type='submit' >Publicar</button>
+
+</form>
+</div>
+
+
+
+{% endblock %}

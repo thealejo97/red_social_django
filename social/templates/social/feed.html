@@ -1,0 +1,30 @@
+{% extends 'social/layout.html' %}
+{%load humanize%}
+
+{% block content %}
+{% if request.user.is_authenticated%}
+{% for post in posts %}
+<article>
+    <div class="container-article">
+        <a href="{% url 'profile' post.user.username %}">
+            <img src="{{post.user.profile.image.url}}"  >
+        </a>
+        <div>
+            <h2 class="username"><a href="{% url 'profile' post.user.username %}">{{post.user.username}}</a></h2>
+            <i class="clock"></i>
+            <time data-time="#">{{post.timestamp|naturaltime}}</time>
+            <div class="post">{{post.content}}</div>
+            
+        </div>
+        
+        
+    </div>
+    {% if post.image_post %}
+    <div class ="post-image"><img src="{{post.image_post.url }}"></div>
+    {%endif%}
+</article>
+{% endfor %}
+{%else%}
+<h1>Por favor inicie sesion para ver el feed.</h1>
+{%endif%}
+{% endblock %}
